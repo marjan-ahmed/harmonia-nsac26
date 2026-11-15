@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #f5f5f7;
+  --color-surface: #ffffff;
+  --color-raised: #f2f2f4;
+  --color-fg: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-ember: #c45c26;
+  --color-mist: #6a93a6;
+  --color-line: #e8e8ed;
+  --shadow-soft: 0 10px 40px rgb(0 0 0 / 0.05);
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  .leaflet-container {
+    background: var(--color-raised);
+    font-family: var(--font-sans);
+    height: 100%;
+    width: 100%;
+  }
+
+  .leaflet-control-attribution {
+    background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+    color: var(--color-muted);
+    font-size: 11px;
+  }
+
+  .leaflet-control-attribution a {
+    color: var(--color-fg);
+  }
+
+  .leaflet-bar a {
+    background: var(--color-surface);
+    color: var(--color-fg);
+    border-color: var(--color-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

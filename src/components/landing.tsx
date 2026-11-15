@@ -23,8 +23,8 @@ export function Landing() {
             One scale for fire, after MODIS retires.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted">
-            Harmonia puts VIIRS hotspot counts back on the MODIS scale, then lays them on a burning calendar. A manager
-            can see whether a month is outside the record.
+            Two satellites count fires. They do not count the same way. Harmonia puts them on one scale, then shows the
+            month on a calendar.
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
             <Link
@@ -39,6 +39,54 @@ export function Landing() {
             >
               Seven slides
             </Link>
+          </div>
+        </section>
+
+        <section className="max-w-3xl">
+          <h2 className="font-display text-3xl font-light tracking-tight">The problem</h2>
+          <div className="mt-4 space-y-4 text-base leading-relaxed text-muted">
+            <p>
+              People who watch emergencies need to know where a fire is burning now, and also whether this time of year
+              is unusual. Almost half of those emergencies are fires. Some are forest fires. Some come from farming,
+              industry, or clearing land.
+            </p>
+            <p>
+              Satellites mark the hot spots. A calendar of those marks, year after year, shows the busy months, the
+              quiet ones, and the years that do not fit the pattern.
+            </p>
+            <p>
+              That calendar is broken in two. MODIS and VIIRS do not see the ground the same way. One is sharper. One
+              is more sensitive. They do not pass at the same time. You cannot put their counts in one list and trust
+              the jump.
+            </p>
+            <p>
+              MODIS is leaving service. VIIRS takes its place. If the two records cannot be compared, about ten years
+              of history drop out. A fire manager then has no calendar that says when and where burning usually
+              happens.
+            </p>
+          </div>
+        </section>
+
+        <section className="max-w-3xl">
+          <h2 className="font-display text-3xl font-light tracking-tight">The solution</h2>
+          <div className="mt-4 space-y-4 text-base leading-relaxed text-muted">
+            <p>
+              Harmonia is that calendar for Argentina. It uses NASA FIRMS hotspot counts from MODIS and from VIIRS
+              S-NPP, from 20 January 2012 to 31 December 2025. Each VIIRS month is divided by how many more hotspots
+              VIIRS usually sees in that same calendar month. The result is one count, on the MODIS scale.
+            </p>
+            <p>
+              You pick a place, then a month, then a day. The page shows how many hotspots that day had in other years,
+              on one scale, and whether that day sits outside the usual count. Argentina, La Rioja, and Chilecito are
+              the places. The map under them is the month.
+            </p>
+            <p>
+              In August 2020 the whole of Argentina was 3.23 times a normal August. Chilecito, the same month, was
+              quiet.{" "}
+              <strong className="font-semibold text-fg underline underline-offset-4">
+                One calendar, so a new satellite does not erase the history of when burning happens.
+              </strong>
+            </p>
           </div>
         </section>
 

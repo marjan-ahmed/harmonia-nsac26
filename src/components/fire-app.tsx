@@ -16,6 +16,7 @@ import {
 import { Download, Upload } from "lucide-react";
 import { FireMap } from "@/components/fire-map";
 import bundledCsv from "@/data/region_months.csv?raw";
+import bundledDays from "@/data/region_days.csv?raw";
 import { MONTHS } from "@/lib/fire/harmonize";
 import {
   harmonizedMedianByMonth,
@@ -78,6 +79,7 @@ export function FireApp() {
   const [mode, setMode] = useState<Mode>("harmonized");
   const [paint, setPaint] = useState<Paint>("activity");
   const [focus, setFocus] = useState({ year: 2020, month: 8 });
+  const [day, setDay] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const archive = override ?? bundled;
@@ -111,6 +113,29 @@ export function FireApp() {
         : harmonizedAnomaly >= 1.5
           ? "Above normal"
           : "Inside normal";
+  const dayTable = useMemo(() => parseDayFile(bundledDays)[regionId], [regionId]);
+  const monthLength = new Date(focus.year, focus.month, 0).getDate();
+  const activeDay = day != null && day <= monthLength ? day : null;
+  const dayHistory = useMemo(() => {
+    if (activeDay == null) return [];
+    const list: { year: number; modis: number; viirs: number; harmonized: number }[] = [];
+    for (const year of years) {
+      const key = isoDate(year, focus.month, activeDay);
+      if (key < "2012-01-20" || key > "2025-12-31") continue;
+      const found = dayTable?.get(key);
+      const modis = found?.modis ?? 0;
+      const viirs = found?.viirs ?? 0;
+      list.push({ year, modis, viirs, harmonized: harmonizedDay(found, ratios[focus.month] ?? Number.NaN) });
+    }
+    return list.sort((a, b) => a.year - b.year);
+  }, [activeDay, years, focus.month, dayTable, ratios]);
+  const dayNow = dayHistory.find((item) => item.year === focus.year) ?? null;
+  const dayMedian = quantile(
+    dayHistory.map((item) => item.harmonized),
+    0.5,
+  );
+  const dayHarmonizedAnomaly = dayNow ? divide(dayNow.harmonized, dayMedian) : null;
+  const dayRawAnomaly = dayNow ? divide(dayNow.viirs, dayMedian) : null;
 
   async function onFile(file: File | undefined) {
     if (!file) return;
@@ -194,6 +219,7 @@ export function FireApp() {
                 setRegionId(item.id);
                 setOverride(null);
                 setNote("");
+                setDay(null);
               }}
               className={
                 item.id === regionId && !override
@@ -329,6 +355,70 @@ export function FireApp() {
                 onChange={setPaint}
               />
             </div>
+
+            {override ? null : (
+              <section className="rounded-3xl bg-surface p-4 shadow-soft">
+                <h2 className="font-display text-3xl font-light tracking-tight">Choose a day</h2>
+                <p className="mt-1 max-w-2xl text-sm text-muted">
+                  {place.name}, {MONTHS[focus.month - 1]} {focus.year}. Pick a date. The row under it is that same date
+                  in the other years, on the MODIS scale. The map above is still the whole month.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1">
+                  {Array.from({ length: monthLength }, (_, index) => index + 1).map((date) => {
+                    const key = isoDate(focus.year, focus.month, date);
+                    const found = dayTable?.get(key);
+                    const value = mode === "raw" ? (found?.viirs ?? 0) : harmonizedDay(found, ratios[focus.month] ?? Number.NaN);
+                    const selected = activeDay === date;
+                    return (
+                      <button
+                        key={date}
+                        type="button"
+                        onClick={() => setDay(selected ? null : date)}
+                        aria-pressed={selected}
+                        className={
+                          "flex h-11 w-11 flex-col items-center justify-center rounded-md text-xs " +
+                          (selected ? "bg-fg text-white" : value > 0 ? "bg-raised text-fg" : "text-muted")
+                        }
+                      >
+                        <span className="font-medium">{date}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {activeDay != null && dayNow ? (
+                  <div className="mt-4">
+                    <p className="font-display text-3xl font-light tracking-tight">
+                      {dayHarmonizedAnomaly == null
+                        ? "No usual count for this date"
+                        : `${two.format(mode === "raw" ? (dayRawAnomaly ?? 0) : dayHarmonizedAnomaly)}× a usual ${MONTHS[focus.month - 1]} ${activeDay}`}
+                    </p>
+                    <p className="mt-2 text-sm text-muted">
+                      {MONTHS[focus.month - 1]} {activeDay}, {focus.year}: harmonized {count.format(Math.round(dayNow.harmonized))},
+                      VIIRS {count.format(dayNow.viirs)}, MODIS {count.format(dayNow.modis)}. The usual harmonized count
+                      for this date is {count.format(Math.round(dayMedian))}.
+                    </p>
+                    <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+                      {dayHistory.map((item) => (
+                        <button
+                          key={item.year}
+                          type="button"
+                          onClick={() => setFocus({ year: item.year, month: focus.month })}
+                          className={
+                            "min-w-16 rounded-2xl px-3 py-2 text-left " +
+                            (item.year === focus.year ? "bg-fg text-white" : "bg-raised")
+                          }
+                        >
+                          <span className="block text-xs">{item.year}</span>
+                          <span className="block text-sm font-medium">
+                            {compact(mode === "raw" ? item.viirs : item.harmonized)}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </section>
+            )}
 
             <section className="grid gap-4 lg:grid-cols-5">
               <div className="min-w-0 rounded-3xl bg-surface shadow-soft p-3 sm:p-4 lg:col-span-3">
@@ -476,6 +566,31 @@ export function FireApp() {
       <SiteFooter />
     </main>
   );
+}
+
+type DayCount = { modis: number; viirs: number };
+
+function parseDayFile(text: string): Record<string, Map<string, DayCount>> {
+  const out: Record<string, Map<string, DayCount>> = {};
+  const lines = text.replace(/^\uFEFF/, "").trim().split(/\n/);
+  for (let index = 1; index < lines.length; index += 1) {
+    const [region, date, modisText, viirsText] = (lines[index] ?? "").split(",");
+    if (!region || !date) continue;
+    const table = out[region] ?? new Map<string, DayCount>();
+    table.set(date, { modis: Number(modisText) || 0, viirs: Number(viirsText) || 0 });
+    out[region] = table;
+  }
+  return out;
+}
+
+function isoDate(year: number, month: number, day: number): string {
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function harmonizedDay(found: DayCount | undefined, scale: number): number {
+  if (!found) return 0;
+  if (found.viirs > 0 && Number.isFinite(scale) && scale > 0) return found.viirs / scale;
+  return found.modis;
 }
 
 function seasonOf(rows: MonthlyRow[], medians: number[], year: number, mode: Mode) {

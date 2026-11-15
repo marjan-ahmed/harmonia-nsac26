@@ -193,8 +193,8 @@ def build():
         2.3,
         [
             {"text": "MODIS", "size": 28, "color": INK},
-            {"text": "Counted fires one way", "size": 20, "color": MUTED, "before": 10},
-            {"text": "for two decades.", "size": 20, "color": MUTED, "before": 2},
+            {"text": "Leaving service.", "size": 20, "color": MUTED, "before": 10},
+            {"text": "The old count of hotspots.", "size": 20, "color": MUTED, "before": 2},
         ],
     )
     add_text(
@@ -205,12 +205,12 @@ def build():
         2.3,
         [
             {"text": "VIIRS", "size": 28, "color": INK},
-            {"text": "Counts more of them.", "size": 20, "color": MUTED, "before": 10},
-            {"text": "The two numbers are not the same.", "size": 20, "color": MUTED, "before": 2},
+            {"text": "Sees more hotspots.", "size": 20, "color": MUTED, "before": 10},
+            {"text": "A bigger number is not always a worse month.", "size": 20, "color": MUTED, "before": 2},
         ],
     )
     footer(slide, 2)
-    notes(slide, "The problem is the splice, not that fires are bad.")
+    notes(slide, "MODIS is retiring. VIIRS does not count the same way. The problem is the splice.")
 
     # 3. Decision
     slide = blank(prs)
@@ -306,7 +306,7 @@ def build():
         1.05,
         6.2,
         1.8,
-        [{"text": "Open a month. Read the flag.", "size": 36, "color": INK}],
+        [{"text": "Pick a place. Then a day.", "size": 36, "color": INK}],
     )
     add_text(
         slide,
@@ -315,10 +315,10 @@ def build():
         5.8,
         3.2,
         [
-            {"text": "A burning calendar, 2012–2025.", "size": 20, "color": INK},
-            {"text": "A map of 0.05° bins.", "size": 20, "color": INK, "before": 10},
-            {"text": "The season against the record.", "size": 20, "color": INK, "before": 10},
-            {"text": "Argentina, La Rioja, and Chilecito.", "size": 20, "color": INK, "before": 10},
+            {"text": "Argentina, La Rioja, or Chilecito.", "size": 20, "color": INK},
+            {"text": "A month calendar, then that date in every year.", "size": 20, "color": INK, "before": 10},
+            {"text": "A flag against the usual count, on the MODIS scale.", "size": 20, "color": INK, "before": 10},
+            {"text": "The map is the whole month, in 0.05° bins.", "size": 20, "color": INK, "before": 10},
         ],
     )
     slide.shapes.add_picture(
@@ -329,7 +329,7 @@ def build():
         Inches(3.56),
     )
     footer(slide, 5)
-    notes(slide, "If you are in the room, leave this slide and open the live app.")
+    notes(slide, "Show the day row. Argentina, La Rioja, or Chilecito. The map is still the whole month.")
 
     # 6. Decision question
     slide = blank(prs)
@@ -340,7 +340,7 @@ def build():
         1.4,
         11.5,
         2.2,
-        [{"text": "Is this month outside the record?", "size": 44, "color": INK}],
+        [{"text": "Is this day, in this place, outside the record?", "size": 40, "color": INK}],
     )
     add_text(
         slide,
@@ -350,7 +350,7 @@ def build():
         2.0,
         [
             {
-                "text": "That is the only question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
+                "text": "That is the question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
                 "size": 22,
                 "color": MUTED,
             },
@@ -358,7 +358,7 @@ def build():
         ],
     )
     footer(slide, 6)
-    notes(slide, "One user. One question.")
+    notes(slide, "One user. One place. One day. Fire managers first.")
 
     # 7. Limits
     slide = blank(prs)
@@ -378,11 +378,11 @@ def build():
         11,
         3.2,
         [
-            {"text": "Not burned area.", "size": 24, "color": INK},
+            {"text": "Not burned area. Not a fire burning right now.", "size": 24, "color": INK},
             {"text": "Not an official provincial boundary.", "size": 24, "color": INK, "before": 10},
-            {"text": "Not 2001–2011. Those years are not in this extract.", "size": 24, "color": INK, "before": 10},
+            {"text": "Not 2001–2011. The file starts 20 January 2012.", "size": 24, "color": INK, "before": 10},
             {
-                "text": "The long record is the next file, not a claim in this build.",
+                "text": "The map is the month, not one day.",
                 "size": 20,
                 "color": MUTED,
                 "before": 22,
@@ -390,7 +390,7 @@ def build():
         ],
     )
     footer(slide, 7)
-    notes(slide, "Do not promise the missing years as if they are already in the app.")
+    notes(slide, "Do not claim burned area, a live fire, official borders, or the years before 2012.")
 
     if len(prs.slides) != 7:
         raise SystemExit(f"expected 7 slides, got {len(prs.slides)}")

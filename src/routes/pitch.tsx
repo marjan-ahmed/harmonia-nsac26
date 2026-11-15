@@ -15,8 +15,8 @@ const SLIDES = [
   {
     kicker: "The break",
     title: "The record is split in two.",
-    body: "MODIS counted fires one way. VIIRS counts more of them. A manager cannot tell a bad month from a new sensor.",
-    note: "The problem is the splice, not that fires are bad.",
+    body: "MODIS is leaving service. VIIRS counts more hotspots, and the two numbers are not the same. A bigger count can be a new satellite, not a worse month.",
+    note: "MODIS is retiring. VIIRS does not count the same way. The problem is the splice.",
   },
   {
     kicker: "August 2020",
@@ -32,21 +32,21 @@ const SLIDES = [
   },
   {
     kicker: "The tool",
-    title: "Open a month. Read the flag.",
-    body: "A calendar, a map of 0.05° bins, and the season against the record. Argentina, La Rioja, and Chilecito.",
-    note: "If you are in the room, leave this slide and open the live app.",
+    title: "Pick a place. Then a day.",
+    body: "Argentina, La Rioja, or Chilecito. The calendar is the month. The day row is that date in every other year, on the MODIS scale. The map is the whole month, in 0.05° bins.",
+    note: "Show the day row. Argentina, La Rioja, or Chilecito. The map is still the whole month.",
   },
   {
     kicker: "Who decides",
-    title: "Is this month outside the record?",
-    body: "That is the only question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
-    note: "One user. One question. Fire managers, then scientists and land managers.",
+    title: "Is this day, in this place, outside the record?",
+    body: "That is the question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
+    note: "One user. One place. One day. Fire managers first.",
   },
   {
     kicker: "Still open",
     title: "The overlap is honest. The long record is not in this file.",
-    body: "Not burned area. Not an official provincial boundary. Not 2001–2011. Those MODIS-only years are the next archive, not a claim in this build.",
-    note: "Do not promise the missing years as if they are already in the app.",
+    body: "Not burned area. Not a fire that is burning right now. Not an official provincial boundary. Not 2001–2011. The map is the month, not one day. Those limits stay in the file.",
+    note: "Do not claim burned area, a live fire, official borders, or the years before 2012.",
   },
 ] as const;
 

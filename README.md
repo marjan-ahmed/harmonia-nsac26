@@ -4,7 +4,7 @@ Team **Allama Ikbar**. NASA Space Apps Challenge 2026.
 
 Challenge: **Harmonization of MODIS and VIIRS Hot Spots**.
 
-Harmonia is a web app that puts VIIRS active-fire hotspot counts onto the MODIS scale and shows them as a burning-activity calendar. A fire manager opens a place and a month and sees whether that month is outside the historical record.
+Harmonia is a web app that puts VIIRS active-fire hotspot counts onto the MODIS scale and shows them as a burning-activity calendar. A fire manager opens a place, a month, and a day, and sees whether that date is outside the historical record.
 
 - Muhammad Marjan Ahmed, team lead
 - Muhammad Sufyan Ahmed
@@ -13,7 +13,7 @@ Harmonia is a web app that puts VIIRS active-fire hotspot counts onto the MODIS 
 
 The record of active-fire hotspots is split. MODIS counted fires one way. VIIRS counts more of them. Those two numbers are not the same, so a jump in the VIIRS count can be a new sensor rather than a worse fire season.
 
-Harmonia divides each VIIRS monthly count by that calendar month’s median VIIRS/MODIS ratio. The result is a harmonized count on the MODIS scale. The calendar, the flag, and the season chart use that number. A raw VIIRS view is still available, so the unscaled count is not hidden.
+Harmonia divides each VIIRS monthly count by that calendar month’s median VIIRS/MODIS ratio. The result is a harmonized count on the MODIS scale. The calendar, the day row, the flag, and the season chart use that number. A raw VIIRS view is still available, so the unscaled count is not hidden.
 
 Places in this build:
 
@@ -36,7 +36,9 @@ Counts come from NASA FIRMS active-fire detections, counted as delivered.
 
 This is not burned area. It is not a 0.01° cell-day index. Years 2001–2011 are not in this extract, so the app does not show them.
 
-The raw FIRMS archives are not in this repository. They are large. What is included is the monthly summary (`src/data/region_months.csv`) and the 0.05° map cells (`public/grid/`).
+The raw FIRMS archives are not in this repository. They are large. What is included is the monthly summary (`src/data/region_months.csv`), the daily counts (`src/data/region_days.csv`), and the 0.05° map cells (`public/grid/`).
+
+Column names follow NASA’s [MODIS and VIIRS active-fire attributes](https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs): latitude, longitude, acq_date, confidence, and type. The calendar does not download that page. It uses those definitions on the files already counted.
 
 ## Method
 
@@ -84,7 +86,7 @@ Production build:
 npm run build
 ```
 
-No login is required. The app does not call FIRMS at runtime. The monthly counts are bundled.
+No login is required. The monthly and daily counts are bundled. The app does not download new detections at runtime. **This month on the FIRMS map** opens NASA’s public map for the place and month on screen, or for the selected day. That map is a check. It is not a second source for the calendar numbers.
 
 ### Load monthly CSV
 

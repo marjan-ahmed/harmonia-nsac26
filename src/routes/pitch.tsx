@@ -33,8 +33,8 @@ const SLIDES = [
   {
     kicker: "How it works",
     title: "NASA FIRMS, on one scale.",
-    body: "MODIS Collection 6.1 Terra+Aqua and VIIRS S-NPP Collection 2, 20 January 2012 to 31 December 2025. Harmonized is the VIIRS count divided by that month’s median ratio. Overall median 3.507. In-sample error 6.0%.",
-    note: "If asked about 2001, say the extract starts 20 January 2012. Do not invent those years.",
+    body: "MODIS Collection 6.1 Terra+Aqua and VIIRS S-NPP Collection 2, 20 January 2012 to 31 December 2025. Harmonized is the VIIRS count divided by that month’s median ratio. Overall median 3.507. In-sample error 6.0%. The same place and month open on the NASA FIRMS map.",
+    note: "The FIRMS map is a check, not a second dataset. If asked about 2001, the extract starts 20 January 2012.",
   },
   {
     kicker: "Who it helps",

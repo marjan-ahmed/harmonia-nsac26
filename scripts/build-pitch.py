@@ -10,7 +10,7 @@ from pptx.enum.text import PP_ALIGN
 from pptx.oxml.ns import qn
 from pptx.util import Emu, Inches, Pt
 
-ROOT = Path("/workspace")
+ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "Harmonia-Allama-Ikbar.pptx"
 TEAM = ROOT / "public" / "team"
 
@@ -289,6 +289,7 @@ def build():
             {"text": "20 January 2012 to 31 December 2025", "size": 18, "color": INK, "before": 8},
             {"text": "Harmonized = VIIRS ÷ month ratio", "size": 18, "color": INK, "before": 14},
             {"text": "Overall median 3.507. In-sample error 6.0%.", "size": 16, "color": MUTED, "before": 8},
+            {"text": "The same month opens on the NASA FIRMS map.", "size": 16, "color": MUTED, "before": 8},
         ],
     )
     slide.shapes.add_picture(
@@ -299,7 +300,7 @@ def build():
         Inches(3.56),
     )
     footer(slide, 5)
-    notes(slide, "Point at the calendar. If asked about 2001, the extract starts 20 January 2012.")
+    notes(slide, "The FIRMS map is a check, not a second dataset. If asked about 2001, the extract starts 20 January 2012.")
 
     # 6. Who
     slide = blank(prs)

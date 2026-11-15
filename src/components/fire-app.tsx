@@ -13,7 +13,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Download, Upload } from "lucide-react";
+import { Download, ExternalLink, Upload } from "lucide-react";
 import { FireMap } from "@/components/fire-map";
 import bundledCsv from "@/data/region_months.csv?raw";
 import bundledDays from "@/data/region_days.csv?raw";
@@ -68,6 +68,26 @@ const PLACES = [
     north: -28.85,
   },
 ] as const;
+
+const ATTRIBUTES =
+  "https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs";
+
+function firmsMapUrl(
+  place: { west: number; south: number; east: number; north: number },
+  year: number,
+  month: number,
+  day: number | null,
+) {
+  const monthText = String(month).padStart(2, "0");
+  const last = new Date(year, month, 0).getDate();
+  const startDay = day && day <= last ? String(day).padStart(2, "0") : "01";
+  const endDay = day && day <= last ? startDay : String(last).padStart(2, "0");
+  const lon = ((place.west + place.east) / 2).toFixed(3);
+  const lat = ((place.south + place.north) / 2).toFixed(3);
+  const span = Math.max(place.east - place.west, place.north - place.south);
+  const zoom = span > 20 ? 4 : span > 3 ? 7 : 10;
+  return `https://firms.modaps.eosdis.nasa.gov/map/#d:${year}-${monthText}-${startDay}..${year}-${monthText}-${endDay};@${lon},${lat},${zoom}z`;
+}
 
 export function FireApp() {
   const regions = useMemo(() => archivesByRegion(bundledCsv), []);
@@ -205,8 +225,13 @@ export function FireApp() {
           month’s median VIIRS/MODIS ratio
           {Number.isFinite(overall) ? ` (overall median ${ratioFmt.format(overall)})` : ""}. In-sample median absolute
           error against MODIS is {Number.isFinite(fitError) ? pct.format(fitError) : "—"}. That fit uses the same
-          months, so it is not an independent validation. These files start 20 January 2012 and end 31 December 2025,
-          so 2001–2011 is not shown. The map bins are 0.05°, not a 0.01° cell-day index, and not burned area.
+          months, so it is not an independent validation. Latitude, longitude, acq_date, confidence, and type are read
+          as defined in NASA’s{" "}
+          <a href={ATTRIBUTES} className="text-fg underline" target="_blank" rel="noreferrer">
+            MODIS and VIIRS active-fire attributes
+          </a>
+          . These files start 20 January 2012 and end 31 December 2025, so 2001–2011 is not shown. The map bins are
+          0.05°, not a 0.01° cell-day index, and not burned area.
         </p>
         {note ? <p className="text-sm text-ember">{note}</p> : null}
 
@@ -241,6 +266,15 @@ export function FireApp() {
               </h2>
               <p className="text-sm text-muted">Copper is MODIS. Blue is VIIRS. Bins inside {place.name}.</p>
             </div>
+            <a
+              href={firmsMapUrl(place, focus.year, focus.month, activeDay)}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-raised px-4 text-sm font-medium"
+            >
+              <ExternalLink className="size-4" aria-hidden="true" />
+              This {activeDay ? "day" : "month"} on the FIRMS map
+            </a>
           </div>
           <div className="p-3">
             <FireMap year={focus.year} month={focus.month} bounds={place} />

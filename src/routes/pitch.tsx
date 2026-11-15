@@ -10,13 +10,19 @@ const SLIDES = [
     kicker: "NASA Space Apps 2026",
     title: "Harmonia",
     body: "One scale for fire, after MODIS retires.",
-    note: "Say the team name and the challenge first. Do not open with the ratio.",
+    note: "Say Allama Ikbar and the challenge first. Do not open with the ratio.",
   },
   {
-    kicker: "The break",
-    title: "The record is split in two.",
-    body: "MODIS is leaving service. VIIRS counts more hotspots, and the two numbers are not the same. A bigger count can be a new satellite, not a worse month.",
-    note: "MODIS is retiring. VIIRS does not count the same way. The problem is the splice.",
+    kicker: "The problem",
+    title: "The fire calendar breaks when the satellite changes.",
+    body: "People who watch emergencies use hotspot history to see a normal month. MODIS and VIIRS do not count the same way. MODIS is leaving service. Without one scale, that history drops out.",
+    note: "This is the challenge Marina Compagnucci set. The problem is the splice, not that fires are bad.",
+  },
+  {
+    kicker: "The solution",
+    title: "One calendar. The sensor no longer matters.",
+    body: "Harmonia puts each VIIRS count back on the MODIS scale. A manager picks Argentina, La Rioja, or Chilecito, then a day, and sees that date in every other year.",
+    note: "Say the solution in one sentence. Then say they can open the app and pick a place and a day.",
   },
   {
     kicker: "August 2020",
@@ -25,28 +31,22 @@ const SLIDES = [
     note: "Pause here. Argentina is outside normal. Chilecito, the same month, is not.",
   },
   {
-    kicker: "NASA data",
-    title: "VIIRS, put back on the MODIS scale.",
-    body: "MODIS Collection 6.1 Terra+Aqua and VIIRS S-NPP Collection 2, from FIRMS. Harmonized count is the VIIRS count divided by that calendar month’s median ratio. Overall median 3.507. In-sample error 6.0%, on the same months, so it is not an independent test.",
+    kicker: "How it works",
+    title: "NASA FIRMS, on one scale.",
+    body: "MODIS Collection 6.1 Terra+Aqua and VIIRS S-NPP Collection 2, 20 January 2012 to 31 December 2025. Harmonized is the VIIRS count divided by that month’s median ratio. Overall median 3.507. In-sample error 6.0%.",
     note: "If asked about 2001, say the extract starts 20 January 2012. Do not invent those years.",
   },
   {
-    kicker: "The tool",
-    title: "Pick a place. Then a day.",
-    body: "Argentina, La Rioja, or Chilecito. The calendar is the month. The day row is that date in every other year, on the MODIS scale. The map is the whole month, in 0.05° bins.",
-    note: "Show the day row. Argentina, La Rioja, or Chilecito. The map is still the whole month.",
-  },
-  {
-    kicker: "Who decides",
+    kicker: "Who it helps",
     title: "Is this day, in this place, outside the record?",
-    body: "That is the question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
-    note: "One user. One place. One day. Fire managers first.",
+    body: "That is the question a fire manager asks. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
+    note: "One user. One place. One day. Fire managers first, then scientists and land managers.",
   },
   {
-    kicker: "Still open",
-    title: "The overlap is honest. The long record is not in this file.",
-    body: "Not burned area. Not a fire that is burning right now. Not an official provincial boundary. Not 2001–2011. The map is the month, not one day. Those limits stay in the file.",
-    note: "Do not claim burned area, a live fire, official borders, or the years before 2012.",
+    kicker: "Why it matters",
+    title: "The calendar survives the satellite.",
+    body: "When MODIS is gone, a manager in Chilecito can still tell a national spike from a quiet local month. The history of when burning happens stays on one page.",
+    note: "End on the person, not on the limits. If asked: not burned area, not a live fire, not official borders, and the map is the month.",
   },
 ] as const;
 
@@ -114,7 +114,7 @@ function Pitch() {
             </div>
           ) : null}
 
-          {index === 2 ? (
+          {index === 3 ? (
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               <figure className="rounded-3xl bg-raised p-6">
                 <figcaption className="text-xs tracking-wide text-muted">Argentina</figcaption>
@@ -129,7 +129,7 @@ function Pitch() {
             </div>
           ) : null}
 
-          {index !== 0 && index !== 2 && slide.body ? (
+          {index !== 0 && index !== 3 && slide.body ? (
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">{slide.body}</p>
           ) : null}
 

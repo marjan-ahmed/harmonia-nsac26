@@ -174,183 +174,153 @@ def build():
 
     # 2. Problem
     slide = blank(prs)
-    add_text(slide, 0.75, 0.55, 8, 0.35, [{"text": "THE BREAK", "size": 14, "color": MUTED}])
+    add_text(slide, 0.75, 0.55, 8, 0.35, [{"text": "THE PROBLEM", "size": 14, "color": MUTED}])
     add_text(
         slide,
         0.75,
         1.15,
-        11.5,
-        1.6,
-        [{"text": "The record is split in two.", "size": 44, "color": INK}],
+        11.8,
+        2.2,
+        [{"text": "The fire calendar breaks when the satellite changes.", "size": 40, "color": INK}],
     )
-    add_card(slide, 0.75, 3.2, 5.6, 2.9)
-    add_card(slide, 6.95, 3.2, 5.6, 2.9)
-    add_text(
-        slide,
-        1.05,
-        3.5,
-        5.0,
-        2.3,
-        [
-            {"text": "MODIS", "size": 28, "color": INK},
-            {"text": "Leaving service.", "size": 20, "color": MUTED, "before": 10},
-            {"text": "The old count of hotspots.", "size": 20, "color": MUTED, "before": 2},
-        ],
-    )
-    add_text(
-        slide,
-        7.25,
-        3.5,
-        5.0,
-        2.3,
-        [
-            {"text": "VIIRS", "size": 28, "color": INK},
-            {"text": "Sees more hotspots.", "size": 20, "color": MUTED, "before": 10},
-            {"text": "A bigger number is not always a worse month.", "size": 20, "color": MUTED, "before": 2},
-        ],
-    )
-    footer(slide, 2)
-    notes(slide, "MODIS is retiring. VIIRS does not count the same way. The problem is the splice.")
-
-    # 3. Decision
-    slide = blank(prs)
-    add_text(slide, 0.75, 0.5, 8, 0.35, [{"text": "AUGUST 2020", "size": 14, "color": MUTED}])
     add_text(
         slide,
         0.75,
-        1.0,
-        12,
-        1.3,
-        [{"text": "The national spike is not the local fire.", "size": 36, "color": INK}],
+        3.6,
+        11.5,
+        2.6,
+        [
+            {"text": "Emergency teams use hotspot history to see a normal month.", "size": 22, "color": INK},
+            {"text": "MODIS and VIIRS do not count the same way.", "size": 22, "color": INK, "before": 12},
+            {"text": "MODIS is leaving service. Without one scale, that history drops out.", "size": 22, "color": MUTED, "before": 12},
+        ],
     )
-    add_card(slide, 0.75, 2.7, 5.7, 3.7)
-    add_card(slide, 6.85, 2.7, 5.7, 3.7)
-    add_text(slide, 1.1, 2.95, 5, 0.4, [{"text": "Argentina", "size": 16, "color": MUTED}])
-    add_text(slide, 1.1, 3.4, 5, 1.2, [{"text": "3.23×", "size": 60, "color": COPPER}])
+    footer(slide, 2)
+    notes(slide, "This is the challenge. The problem is the splice, not that fires are bad.")
+
+    # 3. Solution
+    slide = blank(prs)
+    add_text(slide, 0.75, 0.55, 8, 0.35, [{"text": "THE SOLUTION", "size": 14, "color": MUTED}])
+    add_text(
+        slide,
+        0.75,
+        1.15,
+        11.8,
+        1.8,
+        [{"text": "One calendar. The sensor no longer matters.", "size": 40, "color": INK}],
+    )
+    add_text(
+        slide,
+        0.75,
+        3.4,
+        11.5,
+        2.8,
+        [
+            {"text": "Each VIIRS count is put back on the MODIS scale.", "size": 22, "color": INK},
+            {"text": "Pick Argentina, La Rioja, or Chilecito. Then pick a day.", "size": 22, "color": INK, "before": 12},
+            {"text": "See that date in every other year, and whether it is outside the record.", "size": 22, "color": MUTED, "before": 12},
+        ],
+    )
+    footer(slide, 3)
+    notes(slide, "One sentence. Then open the app and pick a place and a day.")
+
+    # 4. Proof
+    slide = blank(prs)
+    add_text(slide, 0.75, 0.45, 8, 0.3, [{"text": "AUGUST 2020", "size": 14, "color": MUTED}])
+    add_text(
+        slide,
+        0.75,
+        0.85,
+        12,
+        1.15,
+        [{"text": "The national spike is not the local fire.", "size": 34, "color": INK}],
+    )
+    add_card(slide, 0.75, 2.35, 5.7, 4.0)
+    add_card(slide, 6.85, 2.35, 5.7, 4.0)
+    add_text(slide, 1.1, 2.55, 5, 0.35, [{"text": "Argentina", "size": 16, "color": MUTED}])
+    add_text(slide, 1.1, 3.0, 5, 1.15, [{"text": "3.23×", "size": 56, "color": COPPER}])
     add_text(
         slide,
         1.1,
-        5.0,
+        4.55,
         5,
-        1.0,
+        1.3,
         [
             {"text": "37,479 harmonized", "size": 20, "color": INK},
             {"text": "Outside normal", "size": 18, "color": COPPER, "before": 6},
         ],
     )
-    add_text(slide, 7.2, 2.95, 5, 0.4, [{"text": "Chilecito", "size": 16, "color": MUTED}])
-    add_text(slide, 7.2, 3.4, 5, 1.2, [{"text": "0.60×", "size": 60, "color": INK}])
+    add_text(slide, 7.2, 2.55, 5, 0.35, [{"text": "Chilecito", "size": 16, "color": MUTED}])
+    add_text(slide, 7.2, 3.0, 5, 1.15, [{"text": "0.60×", "size": 56, "color": INK}])
     add_text(
         slide,
         7.2,
-        5.0,
+        4.55,
         5,
-        1.0,
+        1.3,
         [
             {"text": "2 harmonized", "size": 20, "color": INK},
-            {"text": "Inside normal", "size": 18, "color": MUTED, "before": 6},
-        ],
-    )
-    footer(slide, 3)
-    notes(slide, "Pause here. Argentina is outside normal. Chilecito, the same month, is not.")
-
-    # 4. Method
-    slide = blank(prs)
-    add_text(slide, 0.75, 0.5, 8, 0.35, [{"text": "NASA DATA", "size": 14, "color": MUTED}])
-    add_text(
-        slide,
-        0.75,
-        1.0,
-        12,
-        1.15,
-        [{"text": "VIIRS, put back on the MODIS scale.", "size": 36, "color": INK}],
-    )
-    add_text(
-        slide,
-        0.75,
-        2.5,
-        6.3,
-        4.0,
-        [
-            {"text": "MODIS Collection 6.1  ·  Terra and Aqua", "size": 20, "color": INK},
-            {"text": "VIIRS S-NPP Collection 2", "size": 20, "color": INK, "before": 8},
-            {"text": "NASA FIRMS active-fire detections", "size": 20, "color": INK, "before": 8},
-            {"text": "Argentina, 20 January 2012 to 31 December 2025", "size": 20, "color": INK, "before": 8},
-            {"text": "All confidence levels and type codes, as delivered.", "size": 18, "color": MUTED, "before": 14},
-        ],
-    )
-    add_card(slide, 7.3, 2.45, 5.25, 3.9)
-    add_text(
-        slide,
-        7.55,
-        2.7,
-        4.8,
-        3.4,
-        [
-            {"text": "Harmonized", "size": 14, "color": MUTED},
-            {"text": "VIIRS  ÷  month ratio", "size": 26, "color": INK, "before": 8},
-            {"text": "Overall median  3.507", "size": 18, "color": INK, "before": 16},
-            {"text": "In-sample error  6.0%", "size": 18, "color": INK, "before": 6},
-            {"text": "Same months. Not an independent test.", "size": 16, "color": MUTED, "before": 10},
+            {"text": "Inside normal. Same month.", "size": 18, "color": MUTED, "before": 6},
         ],
     )
     footer(slide, 4)
-    notes(slide, "If asked about 2001, say the extract starts 20 January 2012. Do not invent those years.")
+    notes(slide, "Pause here. Argentina is outside normal. Chilecito, the same month, is not.")
 
-    # 5. Product
+    # 5. How + NASA data
     slide = blank(prs)
-    add_text(slide, 0.75, 0.5, 6, 0.35, [{"text": "THE TOOL", "size": 14, "color": MUTED}])
+    add_text(slide, 0.7, 0.42, 6, 0.3, [{"text": "HOW IT WORKS", "size": 14, "color": MUTED}])
     add_text(
         slide,
-        0.75,
-        1.05,
-        6.2,
-        1.8,
-        [{"text": "Pick a place. Then a day.", "size": 36, "color": INK}],
+        0.7,
+        0.85,
+        6.1,
+        1.3,
+        [{"text": "NASA FIRMS, on one scale.", "size": 32, "color": INK}],
     )
     add_text(
         slide,
-        0.75,
-        3.15,
-        5.8,
-        3.2,
+        0.7,
+        2.4,
+        5.9,
+        4.0,
         [
-            {"text": "Argentina, La Rioja, or Chilecito.", "size": 20, "color": INK},
-            {"text": "A month calendar, then that date in every year.", "size": 20, "color": INK, "before": 10},
-            {"text": "A flag against the usual count, on the MODIS scale.", "size": 20, "color": INK, "before": 10},
-            {"text": "The map is the whole month, in 0.05° bins.", "size": 20, "color": INK, "before": 10},
+            {"text": "MODIS C6.1 Terra and Aqua", "size": 18, "color": INK},
+            {"text": "VIIRS S-NPP Collection 2", "size": 18, "color": INK, "before": 8},
+            {"text": "20 January 2012 to 31 December 2025", "size": 18, "color": INK, "before": 8},
+            {"text": "Harmonized = VIIRS ÷ month ratio", "size": 18, "color": INK, "before": 14},
+            {"text": "Overall median 3.507. In-sample error 6.0%.", "size": 16, "color": MUTED, "before": 8},
         ],
     )
     slide.shapes.add_picture(
         str(ROOT / "public" / "pitch-app.png"),
         Inches(6.9),
-        Inches(1.7),
+        Inches(1.55),
         Inches(5.7),
         Inches(3.56),
     )
     footer(slide, 5)
-    notes(slide, "Show the day row. Argentina, La Rioja, or Chilecito. The map is still the whole month.")
+    notes(slide, "Point at the calendar. If asked about 2001, the extract starts 20 January 2012.")
 
-    # 6. Decision question
+    # 6. Who
     slide = blank(prs)
-    add_text(slide, 0.75, 0.7, 8, 0.35, [{"text": "WHO DECIDES", "size": 14, "color": MUTED}])
+    add_text(slide, 0.75, 0.7, 8, 0.35, [{"text": "WHO IT HELPS", "size": 14, "color": MUTED}])
     add_text(
         slide,
         0.75,
         1.4,
         11.5,
         2.2,
-        [{"text": "Is this day, in this place, outside the record?", "size": 40, "color": INK}],
+        [{"text": "Is this day, in this place, outside the record?", "size": 36, "color": INK}],
     )
     add_text(
         slide,
         0.75,
-        3.9,
-        10.5,
+        4.0,
+        11,
         2.0,
         [
             {
-                "text": "That is the question. Harmonia answers it on one scale, so the answer still holds when the sensor changes.",
+                "text": "That is the question a fire manager asks. The answer stays on one scale when the sensor changes.",
                 "size": 22,
                 "color": MUTED,
             },
@@ -358,39 +328,41 @@ def build():
         ],
     )
     footer(slide, 6)
-    notes(slide, "One user. One place. One day. Fire managers first.")
+    notes(slide, "One user. One place. One day.")
 
-    # 7. Limits
+    # 7. Impact
     slide = blank(prs)
-    add_text(slide, 0.75, 0.5, 8, 0.35, [{"text": "STILL OPEN", "size": 14, "color": MUTED}])
+    add_text(slide, 0.75, 0.55, 8, 0.35, [{"text": "WHY IT MATTERS", "size": 14, "color": MUTED}])
     add_text(
         slide,
         0.75,
-        1.05,
+        1.2,
         12,
-        1.5,
-        [{"text": "The overlap is honest.", "size": 44, "color": INK}],
+        1.8,
+        [{"text": "The calendar survives the satellite.", "size": 40, "color": INK}],
     )
     add_text(
         slide,
         0.75,
-        2.9,
-        11,
-        3.2,
+        3.5,
+        11.2,
+        2.4,
         [
-            {"text": "Not burned area. Not a fire burning right now.", "size": 24, "color": INK},
-            {"text": "Not an official provincial boundary.", "size": 24, "color": INK, "before": 10},
-            {"text": "Not 2001–2011. The file starts 20 January 2012.", "size": 24, "color": INK, "before": 10},
             {
-                "text": "The map is the month, not one day.",
-                "size": 20,
+                "text": "When MODIS is gone, a manager in Chilecito can still tell a national spike from a quiet local month.",
+                "size": 24,
+                "color": INK,
+            },
+            {
+                "text": "The history of when burning happens stays on one page.",
+                "size": 22,
                 "color": MUTED,
-                "before": 22,
+                "before": 16,
             },
         ],
     )
     footer(slide, 7)
-    notes(slide, "Do not claim burned area, a live fire, official borders, or the years before 2012.")
+    notes(slide, "End on the person. If asked: not burned area, not a live fire, not official borders. The map is the month.")
 
     if len(prs.slides) != 7:
         raise SystemExit(f"expected 7 slides, got {len(prs.slides)}")
